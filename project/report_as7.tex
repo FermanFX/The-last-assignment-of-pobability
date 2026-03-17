@@ -1,0 +1,150 @@
+\documentclass[12pt, letterpaper]{article}
+
+%----------------------------------------------------------------%
+% Preamble: Packages and Document Setup (Match Calculus Reports)
+%----------------------------------------------------------------%
+
+\usepackage{amsmath, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=false, pdfborder={0 0 0}}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{booktabs}
+
+% Define the guidance text color
+\definecolor{guidancecolor}{rgb}{0.5, 0.5, 0.5}
+
+% Python code styling for the appendix
+\lstdefinestyle{pythonstyle}{
+    commentstyle=\color{black!60},
+    keywordstyle=\color{blue!60!black},
+    numberstyle=\tiny\color{black!60},
+    stringstyle=\color{green!40!black},
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{black!20},
+    backgroundcolor=\color{black!2},
+    tabsize=2
+}
+
+% Helper: include figure if present, otherwise show a placeholder box.
+\newcommand{\includeorplaceholder}[1]{%
+\IfFileExists{#1}{%
+    \includegraphics[width=0.85\linewidth]{#1}%
+}{%
+    \fbox{\parbox[c][0.33\textheight][c]{0.85\linewidth}{\centering
+    \texttt{\detokenize{#1}} not found.\\
+    Place the generated figure next to this \texttt{.tex} file.}}%
+}%
+}
+
+\title{\vspace*{2cm}\Huge \textbf{Math4AI: Probability \& Statistics}\\[0.3cm]
+\LARGE Assignment 7 Report: Markov Chains \& Sampling Methods\\[0.2cm]
+\large National AI Academy}
+\author{\textbf{[Fərman Xankişiyev]} \\ \texttt{[ferman.xankisiyev25@aiacademy.az]}}
+\date{February 26, 2026 - March 17, 2026}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+%================================================================%
+\section{Task 7.1: PageRank (Power Iteration)}
+%================================================================%
+
+\textit{\textcolor{guidancecolor}{
+[Guidance: Explain how PageRank treats the web as a Markov Chain. Briefly describe the update rule and the role of the damping factor $d$.]
+}}
+
+\subsection{Results}
+\textit{\textcolor{guidancecolor}{
+[Guidance: Report the final scores. Which node had the highest score? Explain why a node with fewer incoming links might still rank higher than a node with many incoming links (Hint: "Vote Quality").]
+}}
+
+\begin{itemize}
+    \item Node 0: \texttt{[0.1281]}
+    \item Node 1: \texttt{[0.1191]}
+    \item Node 2: \texttt{[0.0974]}
+    \item Node 3: \texttt{[0.1233]}
+    \item Node 4: \texttt{[0.0778]}
+    \item Node 5: \texttt{[0.0985]}
+    \item Node 6: \texttt{[0.0838]}
+    \item Node 7: \texttt{[0.1195]}
+    \item Node 8: \texttt{[0.0965]}
+    \item Node 9: \texttt{[0.0560]}
+    \item \textbf{Most Important Node: 0} \texttt{[score: 0.1281]}
+\end{itemize}
+
+\subsection{Graph Visualization}
+\begin{figure}[H]
+\centering
+\includeorplaceholder{pagerank_graph.png}
+\caption{Visualization of the Mini-Internet graph structure.}
+\end{figure}
+
+%================================================================%
+\section{Task 7.2: Metropolis-Hastings (MCMC)}
+%================================================================%
+
+\textit{\textcolor{guidancecolor}{
+[Guidance: Explain the concept of MCMC. How does the acceptance ratio $A(x \to x')$ ensures we sample from the target density?]
+}}
+
+\subsection{Trace Analysis \& Histogram}
+\textit{\textcolor{guidancecolor}{
+[Guidance: A good MCMC chain should look like a "fuzzy caterpillar." Did your chain successfully jump between the two modes (-4 and +4), or did it get stuck? Discuss the concept of "mixing." check the \texttt{mh\_trace\_hist.png} output.]
+}}
+
+\begin{figure}[H]
+\centering
+\includeorplaceholder{mh_trace_hist.png}
+\caption{Left: Trace plot showing the "mixing" of the chain. Right: Histogram of samples vs. True Density.}
+\end{figure}
+
+%================================================================%
+\section{Task 7.3: Gibbs Sampling}
+%================================================================%
+
+\textit{\textcolor{guidancecolor}{
+[Guidance: Describe how Gibbs sampling differs from Metropolis-Hastings (i.e., we accept every sample, but move one coordinate at a time).]
+}}
+
+\subsection{Reconstructing the Joint Distribution}
+\textit{\textcolor{guidancecolor}{
+[Guidance: The scatter plot should show a diagonal ellipse. Explain how we achieved this 2D shape while only ever sampling from simple 1D Normal conditionals. Why is this useful in high dimensions?]
+}}
+
+\begin{figure}[H]
+\centering
+\includeorplaceholder{gibbs_scatter.png}
+\caption{2D Samples generated via Gibbs Sampling ($\rho=0.8$).}
+\end{figure}
+
+%================================================================%
+\section{AI Declaration}
+%================================================================%
+\textit{\textcolor{guidancecolor}{
+[Guidance: If you used AI tools, describe exactly what you used them for (e.g., debugging, explanation, drafting). If not, write ``No AI tools were used.'' ]
+}}
+
+%================================================================%
+\appendix
+\section{Python Implementation}
+%================================================================%
+
+\textit{\textcolor{guidancecolor}{
+[Guidance: Paste your completed Python code here exactly as in your submitted \texttt{.py} file.]
+}}
+
+\begin{lstlisting}[style=pythonstyle, caption={Full Python source code for Assignment 7.}, label={lst:code}]
+# --- Student code pasted here ---
+\end{lstlisting}
+
+\end{document}
